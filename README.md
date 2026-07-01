@@ -1,11 +1,10 @@
 # Chalk Package Documentation
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/chalk/chalk-go)](https://goreportcard.com/report/github.com/chalk/chalk-go)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## About
 
-This package provides a simple way to apply styles (colors, styles) and apply them to text or formatted strings. It is designed to work with various types of writers such as `os.Stdout` for console output.
+This package provides a simple way to apply styles (colors, styles) to text or formatted strings. It is designed to work with various types of writers such as `os.Stdout` for console output.
 
 The purpose of this project is to demonstrate how easy it can be to create a simple library that you can use in your projects without having to worry about the intricacies of file descriptors, error handling, etc., allowing you to focus on writing great code instead of low-level stuff. We aim to make it as minimal and straightforward as possible while still being flexible enough for advanced users.
 
