@@ -12,14 +12,10 @@ The purpose of this project is to demonstrate how easy it can be to create a sim
 ## Installation
 
 ```sh
-go get github.com/chalk/chalk-go
+go get github.com/kahlaoui-2020/go-chalk
 ```
 
-or using `dep`:
-
-```sh
-dep ensure -add github.com/chalk/chalk-go
-```
+## Getting Started
 
 ## Getting Started
 
@@ -28,13 +24,11 @@ dep ensure -add github.com/chalk/chalk-go
 ```go
 package main
 
-import (
-    "github.com/chalk/chalk-go"
-)
+import "github.com/kahlaoui-2020/go-chalk/chalk"
 
 func main() {
     // Create a new instance of the chalk package.
-    c := New()
+    c := chalk.New()
 
     // Apply styles to text or formatted strings.
     c.BgRed().
