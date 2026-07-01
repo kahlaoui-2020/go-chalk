@@ -194,15 +194,21 @@ func (c *Chalk) Strikethrough() *Chalk {
 
 func (c *Chalk) Print(args ...any) {
 	text := c.applyStyles(fmt.Sprint(args...))
-	fmt.Fprint(c.writer, text)
+	if _, err := fmt.Fprint(c.writer, text); err != nil {
+		panic(err)
+	}
 }
 func (c *Chalk) Println(args ...any) {
 	text := c.applyStyles(fmt.Sprint(args...))
-	fmt.Fprintln(c.writer, text)
+	if _, err := fmt.Fprintln(c.writer, text); err != nil {
+		panic(err)
+	}
 }
 func (c *Chalk) Printf(format string, args ...any) {
 	text := c.applyStyles(fmt.Sprintf(format, args...))
-	fmt.Fprint(c.writer, text)
+	if _, err := fmt.Fprint(c.writer, text); err != nil {
+		panic(err)
+	}
 }
 func (c *Chalk) Sprintf(format string, args ...any) string {
 	return c.applyStyles(fmt.Sprintf(format, args...))

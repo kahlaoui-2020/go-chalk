@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-chalk/chalk"
+	"github.com/kahlaoui-2020/go-chalk/chalk"
 )
 
 func main() {
