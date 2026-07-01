@@ -1,57 +1,55 @@
 package chalk
 
-type Style string
-
 // Styles
 const (
-	Bold          Style = "\033[1m"
-	Dim           Style = "\033[2m"
-	Italic        Style = "\033[3m"
-	Underline     Style = "\033[4m"
-	Blink         Style = "\033[5m"
-	Inverse       Style = "\033[7m"
-	Hidden        Style = "\033[8m"
-	Strikethrough Style = "\033[9m"
+	Bold          Code = "\033[1m"
+	Dim           Code = "\033[2m"
+	Italic        Code = "\033[3m"
+	Underline     Code = "\033[4m"
+	Blink         Code = "\033[5m"
+	Inverse       Code = "\033[7m"
+	Hidden        Code = "\033[8m"
+	Strikethrough Code = "\033[9m"
 )
 
 func (c *Chalk) Bold() *Chalk {
-	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Bold)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Bold)
+	return chalk
 }
 func (c *Chalk) Dim() *Chalk {
-	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Dim)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Dim)
+	return chalk
 }
 func (c *Chalk) Italic() *Chalk {
-	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Italic)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Italic)
+	return chalk
 }
 func (c *Chalk) Underline() *Chalk {
-	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Underline)
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Underline)
 
-	return newChalk
+	return chalk
 }
 func (c *Chalk) Blink() *Chalk {
-	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Blink)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Blink)
+	return chalk
 }
 func (c *Chalk) Inverse() *Chalk {
-	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Inverse)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Inverse)
+	return chalk
 }
 func (c *Chalk) Hidden() *Chalk {
-	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Hidden)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Hidden)
+	return chalk
 }
 func (c *Chalk) Strikethrough() *Chalk {
-	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Strikethrough)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Strikethrough)
+	return chalk
 }

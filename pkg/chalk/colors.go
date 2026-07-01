@@ -1,129 +1,127 @@
 package chalk
 
-type Color string
-
-// Foreground colors
+// Foreground codes
 const (
-	Black   Color = "\033[30m"
-	Red     Color = "\033[31m"
-	Green   Color = "\033[32m"
-	Yellow  Color = "\033[33m"
-	Blue    Color = "\033[34m"
-	Magenta Color = "\033[35m"
-	Cyan    Color = "\033[36m"
-	White   Color = "\033[37m"
+	Black   Code = "\033[30m"
+	Red     Code = "\033[31m"
+	Green   Code = "\033[32m"
+	Yellow  Code = "\033[33m"
+	Blue    Code = "\033[34m"
+	Magenta Code = "\033[35m"
+	Cyan    Code = "\033[36m"
+	White   Code = "\033[37m"
 
-	BrightBlack   Color = "\033[90m"
-	BrightRed     Color = "\033[91m"
-	BrightGreen   Color = "\033[92m"
-	BrightYellow  Color = "\033[93m"
-	BrightBlue    Color = "\033[94m"
-	BrightMagenta Color = "\033[95m"
-	BrightCyan    Color = "\033[96m"
-	BrightWhite   Color = "\033[97m"
+	BrightBlack   Code = "\033[90m"
+	BrightRed     Code = "\033[91m"
+	BrightGreen   Code = "\033[92m"
+	BrightYellow  Code = "\033[93m"
+	BrightBlue    Code = "\033[94m"
+	BrightMagenta Code = "\033[95m"
+	BrightCyan    Code = "\033[96m"
+	BrightWhite   Code = "\033[97m"
 )
 
-// Background colors
+// Background codes
 const (
-	BgBlack   Color = "\033[40m"
-	BgRed     Color = "\033[41m"
-	BgGreen   Color = "\033[42m"
-	BgYellow  Color = "\033[43m"
-	BgBlue    Color = "\033[44m"
-	BgMagenta Color = "\033[45m"
-	BgCyan    Color = "\033[46m"
-	BgWhite   Color = "\033[47m"
+	BgBlack   Code = "\033[40m"
+	BgRed     Code = "\033[41m"
+	BgGreen   Code = "\033[42m"
+	BgYellow  Code = "\033[43m"
+	BgBlue    Code = "\033[44m"
+	BgMagenta Code = "\033[45m"
+	BgCyan    Code = "\033[46m"
+	BgWhite   Code = "\033[47m"
 
-	BgBrightBlack   Color = "\033[100m"
-	BgBrightRed     Color = "\033[101m"
-	BgBrightGreen   Color = "\033[102m"
-	BgBrightYellow  Color = "\033[103m"
-	BgBrightBlue    Color = "\033[104m"
-	BgBrightMagenta Color = "\033[105m"
-	BgBrightCyan    Color = "\033[106m"
-	BgBrightWhite   Color = "\033[107m"
+	BgBrightBlack   Code = "\033[100m"
+	BgBrightRed     Code = "\033[101m"
+	BgBrightGreen   Code = "\033[102m"
+	BgBrightYellow  Code = "\033[103m"
+	BgBrightBlue    Code = "\033[104m"
+	BgBrightMagenta Code = "\033[105m"
+	BgBrightCyan    Code = "\033[106m"
+	BgBrightWhite   Code = "\033[107m"
 )
 
 func (c *Chalk) Black() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, Black)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Black)
+	return chalk
 }
 func (c *Chalk) Red() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, Red)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Red)
+	return chalk
 }
 
 func (c *Chalk) Green() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, Green)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Green)
+	return chalk
 }
 func (c *Chalk) Yellow() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, Yellow)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Yellow)
+	return chalk
 }
 func (c *Chalk) Blue() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, Blue)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Blue)
+	return chalk
 }
 func (c *Chalk) Magenta() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, Magenta)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Magenta)
+	return chalk
 }
 func (c *Chalk) Cyan() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, Cyan)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, Cyan)
+	return chalk
 }
 func (c *Chalk) White() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, White)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, White)
+	return chalk
 }
 
 // Background color methods
 func (c *Chalk) BgBlack() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, BgBlack)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, BgBlack)
+	return chalk
 }
 func (c *Chalk) BgRed() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, BgRed)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, BgRed)
+	return chalk
 }
 func (c *Chalk) BgGreen() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, BgGreen)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, BgGreen)
+	return chalk
 }
 func (c *Chalk) BgYellow() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, BgYellow)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, BgYellow)
+	return chalk
 }
 func (c *Chalk) BgBlue() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, BgBlue)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, BgBlue)
+	return chalk
 }
 func (c *Chalk) BgMagenta() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, BgMagenta)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, BgMagenta)
+	return chalk
 }
 func (c *Chalk) BgCyan() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, BgCyan)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, BgCyan)
+	return chalk
 }
 func (c *Chalk) BgWhite() *Chalk {
-	newChalk := c.clone()
-	newChalk.colors = append(newChalk.colors, BgWhite)
-	return newChalk
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, BgWhite)
+	return chalk
 }

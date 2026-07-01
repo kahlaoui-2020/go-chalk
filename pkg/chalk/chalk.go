@@ -7,16 +7,14 @@ import (
 )
 
 type Chalk struct {
-	colors  []Color
-	styles  []Style
+	codes   []Code
 	writer  io.Writer
 	enabled bool
 }
 
 func New() *Chalk {
 	return &Chalk{
-		colors:  []Color{},
-		styles:  []Style{},
+		codes:   []Code{},
 		writer:  os.Stdout,
 		enabled: isTerminal(),
 	}
@@ -41,33 +39,28 @@ func (c *Chalk) Disable() *Chalk {
 	c.enabled = false
 	return c
 }
-func (c *Chalk) AddColor(color Color) *Chalk {
-	c.colors = append(c.colors, color)
-	return c
-}
-func (c *Chalk) AddStyle(style Style) *Chalk {
-	c.styles = append(c.styles, style)
-	return c
+func (c *Chalk) Add(code Code) *Chalk {
+	chalk := c.clone()
+	chalk.codes = append(chalk.codes, code)
+
+	return chalk
 }
 func (c *Chalk) applyStyles(text string) string {
-	if !c.enabled || (len(c.styles) == 0 && len(c.colors) == 0) {
+	if !c.enabled || (len(c.codes) == 0) {
 		return text
 	}
-	var styledText strings.Builder
-	for _, style := range c.styles {
-		styledText.WriteString(string(style))
+	var sb strings.Builder
+	for _, code := range c.codes {
+		sb.WriteString(string(code))
 	}
-	for _, color := range c.colors {
-		styledText.WriteString(string(color))
-	}
-	styledText.WriteString(text)
-	styledText.WriteString(string(Reset))
-	return styledText.String()
+
+	sb.WriteString(text)
+	sb.WriteString(string(Reset))
+	return sb.String()
 }
 func (c *Chalk) clone() *Chalk {
 	newChalk := &Chalk{
-		colors:  append([]Color{}, c.colors...),
-		styles:  append([]Style{}, c.styles...),
+		codes:   append([]Code{}, c.codes...),
 		writer:  c.writer,
 		enabled: c.enabled,
 	}
