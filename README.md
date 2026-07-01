@@ -17,8 +17,6 @@ go get github.com/kahlaoui-2020/go-chalk
 
 ## Getting Started
 
-## Getting Started
-
 ### Basic Usage Example
 
 ```go
