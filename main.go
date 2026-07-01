@@ -12,5 +12,5 @@ func main() {
 	c.Println("Hello, World!")
 
 	c1 := chalk.New()
-	c1.Red().Println("This is red text")
+	c1.RGB(255, 0, 0).Println("This is red text")
 }
