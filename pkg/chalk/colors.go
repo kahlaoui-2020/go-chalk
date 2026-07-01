@@ -43,19 +43,3 @@ const (
 	BgBrightCyan    Color = "\033[106m"
 	BgBrightWhite   Color = "\033[107m"
 )
-
-// Styles
-const (
-	Bold          Color = "\033[1m"
-	Dim           Color = "\033[2m"
-	Italic        Color = "\033[3m"
-	Underline     Color = "\033[4m"
-	Blink         Color = "\033[5m"
-	Inverse       Color = "\033[7m"
-	Hidden        Color = "\033[8m"
-	Strikethrough Color = "\033[9m"
-)
-
-const (
-	Reset Color = "\033[0m"
-)

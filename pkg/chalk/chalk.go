@@ -8,14 +8,16 @@ import (
 )
 
 type Chalk struct {
-	styles  []Color
+	colors  []Color
+	styles  []Style
 	writer  io.Writer
 	enabled bool
 }
 
 func New() *Chalk {
 	return &Chalk{
-		styles:  []Color{},
+		colors:  []Color{},
+		styles:  []Style{},
 		writer:  os.Stdout,
 		enabled: isTerminal(),
 	}
@@ -40,17 +42,24 @@ func (c *Chalk) Disable() *Chalk {
 	c.enabled = false
 	return c
 }
-func (c *Chalk) Add(style Color) *Chalk {
+func (c *Chalk) AddColor(color Color) *Chalk {
+	c.colors = append(c.colors, color)
+	return c
+}
+func (c *Chalk) AddStyle(style Style) *Chalk {
 	c.styles = append(c.styles, style)
 	return c
 }
 func (c *Chalk) applyStyles(text string) string {
-	if !c.enabled || len(c.styles) == 0 {
+	if !c.enabled || (len(c.styles) == 0 && len(c.colors) == 0) {
 		return text
 	}
 	var styledText strings.Builder
 	for _, style := range c.styles {
 		styledText.WriteString(string(style))
+	}
+	for _, color := range c.colors {
+		styledText.WriteString(string(color))
 	}
 	styledText.WriteString(text)
 	styledText.WriteString(string(Reset))
@@ -58,7 +67,8 @@ func (c *Chalk) applyStyles(text string) string {
 }
 func (c *Chalk) clone() *Chalk {
 	newChalk := &Chalk{
-		styles:  append([]Color{}, c.styles...),
+		colors:  append([]Color{}, c.colors...),
+		styles:  append([]Style{}, c.styles...),
 		writer:  c.writer,
 		enabled: c.enabled,
 	}
@@ -67,85 +77,85 @@ func (c *Chalk) clone() *Chalk {
 
 func (c *Chalk) Black() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Black)
+	newChalk.colors = append(newChalk.colors, Black)
 	return newChalk
 }
 func (c *Chalk) Red() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Red)
+	newChalk.colors = append(newChalk.colors, Red)
 	return newChalk
 }
 
 func (c *Chalk) Green() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Green)
+	newChalk.colors = append(newChalk.colors, Green)
 	return newChalk
 }
 func (c *Chalk) Yellow() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Yellow)
+	newChalk.colors = append(newChalk.colors, Yellow)
 	return newChalk
 }
 func (c *Chalk) Blue() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Blue)
+	newChalk.colors = append(newChalk.colors, Blue)
 	return newChalk
 }
 func (c *Chalk) Magenta() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Magenta)
+	newChalk.colors = append(newChalk.colors, Magenta)
 	return newChalk
 }
 func (c *Chalk) Cyan() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, Cyan)
+	newChalk.colors = append(newChalk.colors, Cyan)
 	return newChalk
 }
 func (c *Chalk) White() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, White)
+	newChalk.colors = append(newChalk.colors, White)
 	return newChalk
 }
 
 // Background color methods
 func (c *Chalk) BgBlack() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, BgBlack)
+	newChalk.colors = append(newChalk.colors, BgBlack)
 	return newChalk
 }
 func (c *Chalk) BgRed() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, BgRed)
+	newChalk.colors = append(newChalk.colors, BgRed)
 	return newChalk
 }
 func (c *Chalk) BgGreen() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, BgGreen)
+	newChalk.colors = append(newChalk.colors, BgGreen)
 	return newChalk
 }
 func (c *Chalk) BgYellow() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, BgYellow)
+	newChalk.colors = append(newChalk.colors, BgYellow)
 	return newChalk
 }
 func (c *Chalk) BgBlue() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, BgBlue)
+	newChalk.colors = append(newChalk.colors, BgBlue)
 	return newChalk
 }
 func (c *Chalk) BgMagenta() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, BgMagenta)
+	newChalk.colors = append(newChalk.colors, BgMagenta)
 	return newChalk
 }
 func (c *Chalk) BgCyan() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, BgCyan)
+	newChalk.colors = append(newChalk.colors, BgCyan)
 	return newChalk
 }
 func (c *Chalk) BgWhite() *Chalk {
 	newChalk := c.clone()
-	newChalk.styles = append(newChalk.styles, BgWhite)
+	newChalk.colors = append(newChalk.colors, BgWhite)
 	return newChalk
 }
 
@@ -215,19 +225,4 @@ func (c *Chalk) Sprintf(format string, args ...any) string {
 }
 func (c *Chalk) String() string {
 	return c.applyStyles("")
-}
-
-var DefaultChalk = New()
-
-func Print(args ...any) {
-	DefaultChalk.Print(args...)
-}
-func Println(args ...any) {
-	DefaultChalk.Println(args...)
-}
-func Printf(format string, args ...any) {
-	DefaultChalk.Printf(format, args...)
-}
-func Sprintf(format string, args ...any) string {
-	return DefaultChalk.Sprintf(format, args...)
 }
