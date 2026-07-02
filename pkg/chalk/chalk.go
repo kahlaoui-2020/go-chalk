@@ -40,10 +40,15 @@ func (c *Chalk) Disable() *Chalk {
 	return c
 }
 func (c *Chalk) Add(code Code) *Chalk {
-	chalk := c.clone()
-	chalk.codes = append(chalk.codes, code)
-
-	return chalk
+	c.codes = append(c.codes, code)
+	return c
+}
+func (c *Chalk) String() string {
+	return c.applyStyles("")
+}
+func (c *Chalk) Clear() *Chalk {
+	c.codes = []Code{}
+	return c
 }
 func (c *Chalk) applyStyles(text string) string {
 	if !c.enabled || (len(c.codes) == 0) {
@@ -65,7 +70,4 @@ func (c *Chalk) clone() *Chalk {
 		enabled: c.enabled,
 	}
 	return newChalk
-}
-func (c *Chalk) String() string {
-	return c.applyStyles("")
 }
