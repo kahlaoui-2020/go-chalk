@@ -10,6 +10,7 @@ type Chalk struct {
 	codes   []Code
 	writer  io.Writer
 	enabled bool
+	debug   bool
 }
 
 func New() *Chalk {
@@ -17,6 +18,7 @@ func New() *Chalk {
 		codes:   []Code{},
 		writer:  os.Stdout,
 		enabled: isTerminal(),
+		debug:   false,
 	}
 }
 
@@ -39,6 +41,16 @@ func (c *Chalk) Disable() *Chalk {
 	c.enabled = false
 	return c
 }
+func (c *Chalk) SetDebug(debug bool) *Chalk {
+	c.debug = debug
+	return c
+}
+func (c *Chalk) Debug() *Chalk {
+	cl := c.clone()
+	cl.debug = true
+	return cl
+}
+
 func (c *Chalk) Add(code Code) *Chalk {
 	c.codes = append(c.codes, code)
 	return c
